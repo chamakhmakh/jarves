@@ -23,21 +23,21 @@ const Demo = () => {
       icon: MonitorIcon,
       description:
         "Ask JARVES to search for information, open websites, or find specific content online.",
-      videoUrl: "/video.mp4",
+      videoUrl: "/videos/video1.mp4",
     },
     {
       title: "Control Your System",
       icon: ClockIcon,
       description:
         "Tell JARVES to shut down your computer, set reminders, or adjust system settings.",
-      videoUrl: "/video.mp4",
+      videoUrl: "/videos/video2.mp4",
     },
     {
       title: "Voice Dictation",
       icon: MicIcon,
       description:
         "Dictate emails, documents, or messages without touching your keyboard.",
-      videoUrl: "/video.mp4",
+      videoUrl: "/videos/video3.mp4",
     },
   ];
   const sectionRef = useRef(null);
@@ -113,23 +113,38 @@ const Demo = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  });
+  }, []);
 
   useEffect(() => {
     if (videoRef.current) {
       if (isPlaying) {
-        videoRef.current.play();
+        videoRef.current.play().catch((error) => {
+          console.error("Error playing video:", error);
+        });
       } else {
         videoRef.current.pause();
       }
     }
   }, [isPlaying]);
+
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.src = demoTabs[activeTab].videoUrl;
+      const tab = demoTabs[activeTab];
+      if (!tab || !tab.videoUrl) {
+        console.warn("No video URL available for the selected tab.");
+        return;
+      }
+      videoRef.current.src = tab.videoUrl;
+      videoRef.current.load();
+      videoRef.current.play().catch((error) => {
+        console.error("Error playing video:", error);
+      });
       setIsPlaying(true);
     }
+    console.log("Active tab index:", activeTab);
+    console.log("Active tab data:", demoTabs[activeTab]);
   }, [activeTab]);
+
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
@@ -202,13 +217,13 @@ const Demo = () => {
                   <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 </div>
-                <div className="mx-auto text-white text-sm">JARVES Demo</div>
+                <div className="mx-auto text-white text-sm">JARVIS</div>
               </div>
               <video
                 ref={videoRef}
                 className="w-full aspect-video object-cover"
-                loop
                 muted
+                loop
                 playsInline
                 src={demoTabs[activeTab].videoUrl}
               />

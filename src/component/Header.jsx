@@ -7,19 +7,11 @@ import gsap from "gsap";
 const navigation = [
   {
     name: "Features",
-    href: "/",
+    href: "#features",
   },
   {
     name: "How It Work",
-    href: "/",
-  },
-  {
-    name: "Testimonials",
-    href: "/",
-  },
-  {
-    name: "Princing",
-    href: "/",
+    href: "#demo",
   },
 ];
 
@@ -132,10 +124,13 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <div className="flex items-center">
-          <span className="logo font-title text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-tr from-[#9175dd] to-gray-900">
+        <div className="flex items-center cursor-pointer">
+          <a
+            href="#"
+            className="logo font-title text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-tr from-[#9175dd] to-gray-900"
+          >
             JARVIS
-          </span>
+          </a>
         </div>
         <nav className="hidden md:flex items-center space-x-8">
           {navigation.map(({ name, href }, i) => (
@@ -150,9 +145,11 @@ const Header = () => {
           <Button variant="outline" ref={logInRef}>
             Log In
           </Button>
-          <Button ref={getStartedRef} variant="new">
-            Get Started
-          </Button>
+          <a href="#download">
+            <Button ref={getStartedRef} variant="new">
+              Get Started
+            </Button>
+          </a>
         </nav>
 
         <div className="md:hidden">
@@ -169,7 +166,7 @@ const Header = () => {
         </div>
       </div>
       {mobileMenuOpen && (
-        <div className="menu-mobile md:hidden bg-white shadow-lg">
+        <div className="menu-mobile md:hidden border-t border-gray-600 shadow-lg">
           <div className="flex flex-col px-4 pt-2 pb-4 space-y-4">
             {navigation.map(({ name, href }, i) => (
               <a
@@ -183,7 +180,9 @@ const Header = () => {
             <Button variant="outline" className="w-full">
               Log In
             </Button>
-            <Button className="w-full">Get Started</Button>
+            <a href="#download">
+              <Button className="w-full">Get Started</Button>
+            </a>
           </div>
         </div>
       )}

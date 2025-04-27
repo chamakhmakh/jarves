@@ -107,7 +107,7 @@ const Features = () => {
   });
 
   return (
-    <section ref={sectionRef} className="py-20">
+    <section ref={sectionRef} id="features" className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 ref={headingRef} className="text-3xl md:text-4xl font-bold mb-4">

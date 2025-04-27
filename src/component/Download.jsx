@@ -119,7 +119,11 @@ const Download = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="download"
+      className="py-20 relative overflow-hidden"
+    >
       <div className="absolute inset-0 z-0">
         <div className="absolute top-20 left-10 w-20 h-20 bg-blue-500/25 rounded-full blur-xl animate-pulse bg-blob">
           <div
